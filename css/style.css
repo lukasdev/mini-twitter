@@ -1,0 +1,528 @@
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	list-style-type:none;
+	text-decoration:none;
+	font-family:Roboto;
+}
+body{background:#eee;}
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?ng2q1j');
+	src:url('fonts/icomoon.eot?ng2q1j#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?ng2q1j') format('truetype'),
+		url('fonts/icomoon.woff?ng2q1j') format('woff'),
+		url('fonts/icomoon.svg?ng2q1j#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-user:before {
+	content: "\e900";
+}
+.icon-search:before {
+	content: "\e901";
+}
+
+.aviso{
+	padding:6px;
+	width:100%;
+	float:left;
+	color:white;
+	font-weight:normal;
+}
+
+.aviso.green{background:#009966; border:1px solid #093;}
+.aviso.yellow{background:#F2F200; border:1px solid #CCCC00; color:#333;}
+
+.hidden{display:none;}
+a:hover{text-decoration:underline;}
+
+#header{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	z-index:9999;
+	background:white;
+	border-bottom:1px solid #ccc;
+}
+.left{float:left;}
+.right{float:right;}
+#header ul.left li{
+	float:left;
+}
+#header ul.right li{
+	float:right;
+}
+#header ul li a{
+	float:left;
+	display:inline-block;
+	padding:0 8px;
+	color:#333;
+	font-size:16px;
+	line-height:45px;
+}
+#header ul li a:hover{
+	text-decoration:none;
+	background:linear-gradient(to bottom, #fff, #ccc 130%);
+}
+#header .search{
+	float:left;
+	width:250px;
+	position:relative;
+	background:#f5f6f7;
+	margin-left:10px;
+	margin-top:5px;
+	border-radius:15px;
+	border:1px solid #C5CBD1;
+}
+#header .search .icon-search{
+	position:absolute;
+	top:8px;
+	left:10px;
+	color:#999;
+}
+#header .search input{
+	float:left;
+	width:100%;
+	padding:7px;
+	border:none;
+	outline:none;
+	background:none;
+	padding-left:30px;
+	font-size:16px;
+	color:#666;
+}
+.center{margin:0 auto; width:1000px;}
+
+#wrapper{
+	width:1000px;
+	margin:70px auto;
+}
+#sidebar{
+	float:left;
+	width:29%;
+}
+.box_sidebar{
+	background:#fff;
+	padding:8px;
+	border-radius:6px;
+	border:1px solid #ccc;
+	margin-bottom:10px;
+	position:relative;
+	float:left;
+	width:100%;
+}
+.box_sidebar h2{
+	float:left;
+	width:100%;
+	font-size:20px;
+	color:#6675A7;
+	font-weight:lighter;
+	margin-bottom:10px;
+}
+.box_sidebar li{
+	float:left;
+	width:100%;
+	margin-bottom:10px;
+	font-size:17px;
+}
+.box_sidebar li:last-child{background:none;}
+.box_sidebar li a{color:#000;}
+
+.box_sidebar.perfil .img_perfil{
+	position:absolute;
+	top:-20px;
+	width:80px;
+	height:80px;
+	overflow:hidden;
+	border:1px solid white;
+	border-radius:5px;
+}
+.box_sidebar.perfil .img_perfil img{
+	width:100%;
+}
+.box_sidebar.perfil .dados_user{
+	float:right;
+	width:70%;
+	padding-left:5px;
+}
+.box_sidebar.perfil .dados_user .nome_perfil{
+	float:left;
+	width:100%;
+	font-size:19px;
+	margin-bottom:6px;
+}
+.box_sidebar.perfil .dados_user .nome_perfil a{
+	color:black;
+}
+.box_sidebar.perfil .dados_user a.nickname{
+	color:#666;
+}
+
+.box_sidebar.perfil .stats{
+	float:left;
+	width:100%;
+	margin-top:5px;
+}
+.box_sidebar.perfil .stats .box_stats{
+	float:left;
+	width:33.33%;
+	padding:8px 0;
+}
+.box_sidebar.perfil .stats .box_stats span{
+	text-transform:uppercase;
+	font-size:14px;
+}
+.box_sidebar.perfil .stats .box_stats p{font-size:18px;}
+.box_sidebar.perfil .stats .box_stats p a{color:black;}
+.box_sidebar.perfil .descricao{
+	float:left;
+	width:100%;
+}
+#content_wrapper{
+	float:right;
+	width:70%;
+}
+#content_wrapper #envio_mensagem{
+	float:left;
+	width:100%;
+	padding:15px;
+	background:#0099FF;
+	border-top-left-radius:8px;
+	border-top-right-radius:8px;
+}
+#envio_mensagem .title{
+	float:left;
+	width:100%;
+	font-size:16px;
+	color:white;
+	margin-bottom:10px;
+}
+#envio_mensagem textarea{
+	float:left;
+	width:100%;
+	resize:vertical;
+	border:none;
+	outline:none;
+	padding:8px;
+	border-radius:5px;
+}
+#envio_mensagem .counter{
+	float:left;
+	margin-top:10px;
+	color:white;
+	font-size:16px;
+}
+.send_message{
+	float:right;
+	margin-top:10px;
+	font-size:16px;
+	padding:8px 10px;
+	background:#333;
+	color:white;
+	border-radius:5px;
+	border:0;
+	border-bottom:2px solid #000;
+}
+.send_message:hover{background:#000; cursor:pointer;}
+
+#content{
+	float:left;
+	width:100%;
+}
+h1.title-page{
+	float:left;
+	width:100%;
+	font-size:23px;
+	color:#6675A7;
+	margin-bottom:10px;
+}
+#content .tweet{
+	float:left;
+	width:100%;
+	padding:10px;
+	border-bottom:1px solid #ccc;
+	color:#666;
+	background:white;
+	transition:all ease-in .3s;
+}
+#content .tweet a{color:#09f;}
+
+#content .tweet:hover{background:#f5f6f7;}
+#content .tweet .nome{
+	font-size:16px;
+	float:left;
+	width:100%;
+	margin-bottom:8px;
+}
+#content .tweet .nome a{color:#333; font-weight:bold;}
+#content .tweet p{font-size:15px;}
+#content .tweet .date{font-size:13px; color:#999; float:left; margin-top:8px;}
+.button_aba{
+	float:left;
+	padding:6px 8px;
+	background:#fff;
+	color:#999;
+	margin-right:5px;
+	cursor:pointer;
+}
+.button_aba.ativo{background:#069; color:white;}
+.button_aba.hidden{display:block;}
+#content .aba{
+	background:#fff;
+	float:left;
+	width:100%;
+	padding:10px;
+}
+.aba .img_crop{
+	width:500px;
+	float:left;
+	padding:5px;
+	border:1px solid #ccc;
+}
+.aba .coord{float:right; width:100px; margin-bottom:5px;}
+.edicao_perfil {float:left; width:100%;}
+.edicao_perfil label{
+	float:left;
+	width:100%;
+	margin-bottom:10px;
+}
+.edicao_perfil label span{
+	float:left;
+	width:100%;
+	font-size:16px;
+	color:#666;
+	margin-bottom:12px;
+}
+.edicao_perfil label input, .edicao_perfil textarea{
+	float:left;
+	width:100%;
+	padding:8px;
+	background:white;
+	outline:none;
+	border:1px solid #ccc;
+	font-size:16px;
+	color:#666;
+}
+.edicao_perfil textarea{
+	resize:vertical;
+}
+/***AQUI COMEÇA O CSS DAS LISTAGENS DE PERFIS**/
+.box_perfil{
+	float:left;
+	padding:10px;
+	background:white;
+	width:32%;
+	max-height:168px;
+	border:1px solid #ccc;
+	position:relative;
+	margin-right:2%;
+	margin-bottom:30px;
+	border-radius:5px;
+}
+.box_perfil:nth-child(3n+1){margin-right:0;}
+.box_perfil .img{
+	position:absolute;
+	top:-20px;
+	width:60px;
+	height:60px;
+	overflow:hidden;
+	border:2px solid white;
+	border-radius:5px;
+}
+.box_perfil .img img{width:100%;}
+h1.title-page.seg{margin-bottom:30px;}
+.box_perfil .perfil_nick{
+	float:left;
+	width:100%;
+	margin-top:5px;
+}
+.box_perfil .perfil_nick span{font-size:19px;}
+.box_perfil .perfil_nick span a{color:black;}
+.box_perfil .perfil_nick p{float:left; width:100%; margin-top:6px;}
+.box_perfil .perfil_nick p a{color:#666;}
+.box_perfil .desc{
+	float:left;
+	width:100%;
+	height:66px;
+	overflow:hidden;
+	padding:5px 0 0 0;
+}
+.box_perfil .fix{
+	float:left;
+	width:100%;
+	height:30px;
+}
+.button{
+	display:inline-block;
+	padding:6px 8px;
+	color:#666;
+	border:1px solid #ccc;
+	border-radius:4px;
+	float:right;
+	background:white;
+}
+.button:hover{text-decoration:none; background:linear-gradient(to bottom, #fff, #ccc 130%); cursor:pointer;}
+.button.seguir{
+	background:white;
+}
+.button.seguir:hover{background:linear-gradient(to bottom, #fff, #ccc 130%);}
+
+.button.seguir.side{
+	float:left;
+	width:100%;
+	margin-top:10px;
+}
+
+
+/****PAGINA DE LOGIN***/
+#cadastrar{
+	position:fixed;
+	top:0;
+	left:-550px;
+	width:550px;
+	background:white;
+	padding:20px;
+	height:100%;
+	z-index:999;
+	border-right:2px solid #ccc;
+	overflow-y:scroll;
+}
+#cadastrar .close{
+	position:absolute;
+	top:10px;
+	right:10px;
+	line-height:30px;
+	width:30px;
+	text-align:center;
+	color:#333;
+	background:#f5f6f7;
+	border:1px solid #ccc;
+	border-radius:50%;
+}
+#cadastrar .close:hover{background:#fff; text-decoration:none;}
+#cadastrar p{
+	float:left;
+	width:100%;
+	margin-bottom:25px;
+	font-size:16px;
+	color:#666;
+}
+
+#cadastrar label{
+	float:left;
+	width:100%;
+	margin-bottom:15px;
+}
+
+#cadastrar label span{
+	float:left;
+	width:100%;
+	font-size:17px;
+	color:#666;
+	margin-bottom:10px;
+	float:left;
+}
+#cadastrar label input, #cadastrar textarea{
+	float:left;
+	width:100%;
+	padding:10px;
+	background:white;
+	border:1px solid #ccc;
+	outline:none;
+	font-size:16px;
+	color:#666;
+	transition:all ease-in .3s;
+}
+#cadastrar label input:focus{border-color:#333;}
+#cadastrar textarea{
+	resize:vertical;
+}
+#cadastrar .retorno_cadastro{
+	float:left;
+	width:100%;
+	margin-bottom:10px;
+}
+#logar_box{
+	width:500px;
+	height:220px;
+	padding:15px;
+	background:#fff;
+	display:inline-block;
+	position:absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	margin:auto;
+	border-radius:6px;
+	box-shadow:#666 1px 1px 6px;
+}
+#logar_box .retorno_log{
+	position:absolute;
+	width:500px;
+	left:0;
+	top:-45px;
+	height:40px;
+}
+#logar_box .cadastre-se{
+	position:absolute;
+	bottom:-30px;
+	width:100%;
+	left:0;
+}
+
+#logar_box .cadastre-se p{float:left; width:100%;}
+#logar_box .cadastre-se p a{color:#333;}
+#logar_box label{
+	float:left;
+	width:100%;
+	margin-bottom:15px;
+}
+#logar_box label span{
+	font-size:16px;
+	color:#666;
+	float:left;
+	width:100%;
+	margin-bottom:10px;
+}
+#logar_box label input[type=text], #logar_box label input[type=password]{
+	padding:8px;
+	float:left;
+	width:100%;
+	outline:none;
+	border:1px solid #ccc;
+	border-radius:6px;
+	transition:all ease-in .3s;
+}
+#logar_box label input[type=text]:focus, #logar_box label input[type=password]:focus{
+	border-color:#069;
+}
+.btn_submit {
+	float:right;
+	padding:8px 10px;
+	background:#333;
+	color:white;
+	border-radius:4px;
+	border:0;
+	font-size:17px;
+	border-bottom:2px solid #000;
+}
+.btn_submit:hover{background:black; cursor:pointer;}
