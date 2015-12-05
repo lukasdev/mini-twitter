@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Dez-2015 às 19:24
+-- Generation Time: 06-Dez-2015 às 00:51
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -31,14 +31,15 @@ CREATE TABLE IF NOT EXISTS `follows` (
   `seguidor` int(11) NOT NULL,
   `usuario` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Extraindo dados da tabela `follows`
 --
 
 INSERT INTO `follows` (`id`, `seguidor`, `usuario`) VALUES
-(1, 1, 4);
+(1, 1, 4),
+(2, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -73,19 +74,19 @@ CREATE TABLE IF NOT EXISTS `tweets` (
   `user_id` int(11) NOT NULL,
   `tweet` varchar(250) NOT NULL,
   `data` datetime NOT NULL,
+  `timestamp` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Extraindo dados da tabela `tweets`
 --
 
-INSERT INTO `tweets` (`id`, `user_id`, `tweet`, `data`) VALUES
-(1, 1, 'Este é o primeiro tweet do Zezin da Silva <a href="http://localhost/videoaulas/mini-twitter/hashtag/downs_master">#downs_master</a>', '2015-11-28 12:18:37'),
-(2, 1, 'Este é o segundo tweet do zezin', '2015-11-28 12:18:46'),
-(3, 4, 'Este é o primeiro tweet do Lucas Silva <a href="http://localhost/videoaulas/mini-twitter/hashtag/sou_demais">#sou_demais</a>', '2015-11-28 12:19:09'),
-(4, 4, 'Outro tweet do lucas pra encher linguiça', '2015-11-28 12:19:20'),
-(5, 4, 'Mais um tweet e tal', '2015-11-28 12:19:25');
+INSERT INTO `tweets` (`id`, `user_id`, `tweet`, `data`, `timestamp`) VALUES
+(1, 4, 'Olá Zezin', '2015-12-05 15:26:12', '1449336372'),
+(2, 1, 'E ae', '2015-12-05 15:26:36', '1449336396'),
+(3, 4, 'Tudo beleza', '2015-12-05 15:26:50', '1449336410'),
+(4, 4, 'msg', '2015-12-05 15:27:38', '1449336458');
 
 -- --------------------------------------------------------
 
@@ -110,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `foto`, `nome`, `nickname`, `email`, `senha`, `descricao`) VALUES
 (1, 'a6ccafaf9d519ca756914778daf93414.jpg', 'Zézinho da Silva', 'zezin_santos', 'zezin@gmei.com', '123zezin', 'Esta é a descrição do zezin do santos, ele é muito legal!'),
-(4, '5fe00ac6fd0dd46a665befee0b34bc95.jpg', 'Lucas Silva', 'lukas_dev', 'lukasdev@hotmail.com', '123456', 'Esta é a descrição do lucas silva');
+(4, '2d4b1439f8ce16be1541397c55d8810b.jpg', 'Lucas Silva', 'lukas_dev', 'lukasdev@hotmail.com', '123456', 'Esta é a descrição do lucas silva');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
