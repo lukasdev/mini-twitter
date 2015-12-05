@@ -1,5 +1,6 @@
 <?php
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		session_start();
 		include_once "../config.php";
 
 		$pega_logado = $pdo->prepare("SELECT * FROM `usuarios` WHERE `nickname` = ?");

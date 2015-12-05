@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include_once "config.php";
 	if(!isset($_SESSION['nickname'])){
 		include_once "logar.php";
@@ -24,6 +25,7 @@
 		<title>Mini Twitter</title>
 		<!---<link href='//fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css' />-->
 		<link href="<?php echo BASE;?>/css/style.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo BASE;?>/css/jcrop.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 	<header id="header">
@@ -44,3 +46,4 @@
 		</div>
 	</header>
 	<span class="base" id="<?php echo BASE;?>"></span>
+	<span class="user_id" id="<?php echo $logado->id;?>"></span>

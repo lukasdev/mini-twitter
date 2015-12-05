@@ -1,5 +1,6 @@
 <?php
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		session_start();
 		include_once "../config.php";
 		$pega_logado = $pdo->prepare("SELECT * FROM `usuarios` WHERE `nickname` = ?");
 		$pega_logado->execute(array($_SESSION['nickname']));
@@ -48,8 +49,8 @@
 		}
 
 		if($contagem_hashtags == $n_tags){
-			$insert = $pdo->prepare("INSERT INTO `tweets` SET `user_id` = ?, `tweet` = ?, `data` = ?");
-			$dados = array($retorno['user_id'], $retorno['tweet'], date('Y-m-d H:i:s'));
+			$insert = $pdo->prepare("INSERT INTO `tweets` SET `user_id` = ?, `tweet` = ?, `data` = ?, `timestamp` = ?");
+			$dados = array($retorno['user_id'], $retorno['tweet'], date('Y-m-d H:i:s'), time());
 			if($insert->execute($dados)){
 				$retorno['status'] = 'ok';
 			}else{

@@ -1,5 +1,6 @@
 <?php
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		session_start();
 		include_once "../config.php";
 		$pega_logado = $pdo->prepare("SELECT * FROM `usuarios` WHERE `nickname` = ?");
 		$pega_logado->execute(array($_SESSION['nickname']));
@@ -18,7 +19,7 @@
 					$ids_seguindo[] = $usr->usuario;
 				}
 				$str_seguindo = implode(', ', $ids_seguindo);
-				$ultimo_id = count($_SESSION['ids_carregados'])-1;;
+				$ultimo_id = count($_SESSION['ids_carregados'])-1;
 				$ultimo_id = $_SESSION['ids_carregados'][$ultimo_id];
 
 				$tweets = $pdo->prepare("SELECT * FROM `tweets` WHERE `user_id` IN ($str_seguindo) 

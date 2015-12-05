@@ -1,5 +1,6 @@
 <?php
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		session_start();
 		include_once "../config.php";
 
 		$nome = strip_tags(trim(filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING)));

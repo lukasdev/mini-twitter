@@ -1,5 +1,6 @@
 <?php
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		session_start();
 		include_once "../config.php";
 
 		if($_POST['login'] != '' && $_POST['senha'] != ''){
