@@ -9,21 +9,25 @@
 
 			$verifica = $pdo->prepare("SELECT * FROM `usuarios` WHERE (`email` = ? OR `nickname` = ?) AND `senha` = ?");
 			$verifica->execute(array($login, $login, $senha));
+			$retorno = array();
 			if($verifica->rowCount() == 1){
 				$logado = $verifica->fetchObject();
 				$_SESSION['nickname'] = $logado->nickname;
 				
+				
 				sleep(1);
 				if(isset($_SESSION['nickname'])){
-					echo 'ok';
+					$retorno['status'] = 'ok';
+					$retorno['user_id'] = $logado->id;
 				}else{
-					echo 'no';
+					$retorno['status'] = 'no';
 				}
 			}else{
-				echo 'no';
+				$retorno['status'] = 'no';
 			}
 		}else{
-			echo 'no';
+			$retorno['status'] = 'no';
 		}
+		die(json_encode($retorno));
 	}
 ?>

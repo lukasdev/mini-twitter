@@ -61,37 +61,40 @@ $(function(){
 	$('.send_message').on('click', function(e){
 		e.preventDefault();
 		var texto_digitado = $('.msg').val();
+		if(texto_digitado == ''){
+			alert('Informe um texto para o seu tweet');
+		}else{
+			$.ajax({
+				method: 'POST',
+				url: 'sys/tweetar.php',
+				data: {tweet: texto_digitado},
+				dataType: 'json',
+				success: function(retorno){
+					 /*
+						retorno.nome
+						retorno.tweet
+						retorno.date
+						retorno.status
+					 */
 
-		$.ajax({
-			method: 'POST',
-			url: 'sys/tweetar.php',
-			data: {tweet: texto_digitado},
-			dataType: 'json',
-			success: function(retorno){
-				 /*
-					retorno.nome
-					retorno.tweet
-					retorno.date
-					retorno.status
-				 */
+					 if(retorno.status == 'ok'){
+					 	$('.msg').val('');
+					 	
+					 	var tweet = '<article class="tweet hidden">';
+					 		tweet += '<span class="nome"><a href="#">'+retorno.nome+'</a> disse:</span>';
+							tweet += '<p>'+retorno.tweet+'</p>';
+							tweet += '<span class="date">'+retorno.date+'</span></article>';
 
-				 if(retorno.status == 'ok'){
-				 	$('.msg').val('');
-				 	
-				 	var tweet = '<article class="tweet hidden">';
-				 		tweet += '<span class="nome"><a href="#">'+retorno.nome+'</a> disse:</span>';
-						tweet += '<p>'+retorno.tweet+'</p>';
-						tweet += '<span class="date">'+retorno.date+'</span></article>';
-
-					$('#content').prepend(tweet);
-					$('#content .tweet.hidden').slideDown().promise().done(function(){
-						$(this).removeClass('hidden');
-					});
-				 }else{
-				 	alert('ocorreu um erro ao enviar seu tweet');
-				 }
-			}
-		});
+						$('#content').prepend(tweet);
+						$('#content .tweet.hidden').slideDown().promise().done(function(){
+							$(this).removeClass('hidden');
+						});
+					 }else{
+					 	alert('ocorreu um erro ao enviar seu tweet');
+					 }
+				}
+			});
+		}
 
 		return false;
 	});
@@ -108,9 +111,11 @@ $(function(){
 				method: 'POST',
 				url: 'sys/logar.php',
 				data: {login:login, senha:senha},
+				dataType: 'json',
 				success:function(retorno){
 					//console.log(retorno);
-					if(retorno == 'ok'){
+					if(retorno.status == 'ok'){
+						localStorage.setItem('user_id', retorno.user_id);
 						location.reload();
 					}else{
 						$('.retorno_log').html('<div class="aviso yellow">Ocorreu um erro ao tentar logar, ou login e senha não encontrados</div>');
@@ -209,27 +214,33 @@ $(function(){
 	$('body').on('click', '.load_more', function(e){
 		e.preventDefault();
 		var type = $(this).attr('id');
-
+		var id_user = '';
+		if(type == 'tweets_timeline'){
+			var id_user = $(this).attr('data-id');
+		}
 		$.ajax({
 			method:'POST',
 			url: base+'/sys/load_more.php',
-			data: {tipo: type},
+			data: {tipo: type, user_id: id_user},
 			dataType: 'json',
 			success: function(retorno){
+				if(retorno.load_more == 'nao'){
+					$('.load_more').hide();
+				}
 				/*
 					retorno.nome
 					retorno.tweet
 					retorno.date
 					retorno.status
 				 */
-				 if(type == 'tweets_home'){
+				 if(type == 'tweets_home' || type == 'tweets_timeline'){
 
-				 	$.each(retorno, function(i, val){
+				 	$.each(retorno.results, function(i, val){
 
 				 		var tweet = '<article class="tweet">';
-					 		tweet += '<span class="nome"><a href="#">'+retorno[i].nome+'</a> disse:</span>';
-							tweet += '<p>'+retorno[i].tweet+'</p>';
-							tweet += '<span class="date">'+retorno[i].date+'</span></article>';
+					 		tweet += '<span class="nome"><a href="#">'+retorno.results[i].nome+'</a> disse:</span>';
+							tweet += '<p>'+retorno.results[i].tweet+'</p>';
+							tweet += '<span class="date">'+retorno.results[i].date+'</span></article>';
 						$('.content_tweets').append(tweet);
 				 	});
 				 }

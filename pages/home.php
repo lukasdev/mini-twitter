@@ -48,8 +48,8 @@
 	</div>
 	<?php
 	if($twt->rowCount() > 1){
-			echo '<a href="#" class="button load_more" id="tweets_home">Carregar Mais</a>';
-		}
+		echo '<a href="#" class="button load_more" id="tweets_home">Carregar Mais</a>';
+	}
 	?>
 	</section>
 </section>

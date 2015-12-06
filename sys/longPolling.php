@@ -4,17 +4,16 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 	$logado_id = $_GET['user_id'];
 	$time = (isset($_GET['timestamp']) && $_GET['timestamp'] != 'undefined') ? $_GET['timestamp'] : time();
 	$t = 0;
+	$pega_follows = $pdo->prepare("SELECT * FROM `follows` WHERE `seguidor` = ?");
+	$pega_follows->execute(array($logado_id));
+
+	$ids_seguindo = array();
+	while($usr = $pega_follows->fetchObject()){
+		$ids_seguindo[] = $usr->usuario;
+	}
+	$str_seguindo = implode(', ', $ids_seguindo);
+
 	while($t <= 30){
-
-		$pega_follows = $pdo->prepare("SELECT * FROM `follows` WHERE `seguidor` = ?");
-		$pega_follows->execute(array($logado_id));
-
-		$ids_seguindo = array();
-		while($usr = $pega_follows->fetchObject()){
-			$ids_seguindo[] = $usr->usuario;
-		}
-		$str_seguindo = implode(', ', $ids_seguindo);
-
 		$tweets = $pdo->prepare("SELECT * FROM `tweets` WHERE `user_id` IN ($str_seguindo) 
 			AND `timestamp` >= ? ORDER BY `id` DESC");
 		$tweets->execute(array($time));

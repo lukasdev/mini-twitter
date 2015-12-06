@@ -2,7 +2,7 @@ $(function(){
 	var base = $('.base').attr('id');
 
 	function longPolling(timestamp){
-		var user_id = $('.user_id').attr('id');
+		var user_id = localStorage.user_id;
 		$.ajax({
 			method: 'GET',
 			url: base+'/sys/longPolling.php',

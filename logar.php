@@ -3,7 +3,7 @@
 	<head>
 		<meta charset=UTF-8>
 		<title>Mini Twitter</title>
-		<link href='//fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css' />
+		<!---<link href='//fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css' />-->
 		<link href="<?php echo BASE;?>/css/style.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
