@@ -12,7 +12,7 @@ $(function(){
 				if(retorno.results != ''){
 					$.each(retorno.results, function(i, val){
 						var tweet = '<article class="tweet">';
-					 		tweet += '<span class="nome"><a href="#">'+retorno.results[i].nome+'</a> disse:</span>';
+					 		tweet += '<span class="nome"><a href="'+base+'/'+retorno.results[i].nickname+'">'+retorno.results[i].nome+'</a> disse:</span>';
 							tweet += '<p>'+retorno.results[i].tweet+'</p>';
 							tweet += '<span class="date">'+retorno.results[i].date+'</span></article>';
 						$('#content').prepend(tweet);

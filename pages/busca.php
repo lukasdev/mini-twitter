@@ -2,10 +2,16 @@
 <section id="content_wrapper">
 	<section id="content">
 	<h1 class="title-page seg">Busca</h1>
+	<div class="content_perfis">
 	<?php 
 		$busca = strip_tags(trim($_GET['s']));
-		$pega_result = $pdo->prepare("SELECT * FROM `usuarios` WHERE `nome` LIKE '%$busca%' AND `id` != ? ORDER BY `id` DESC");
+		$usrs = $pdo->prepare("SELECT * FROM `usuarios` WHERE `nome` LIKE '%$busca%'");
+		$usrs->execute();
+
+		$pega_result = $pdo->prepare("SELECT * FROM `usuarios` WHERE `nome` LIKE '%$busca%' AND `id` != ? ORDER BY `id` DESC LIMIT 1");
 		$pega_result->execute(array($logado->id));
+		$_SESSION['ids_carregados'] = array();
+
 		while($user = $pega_result->fetchObject()){
 
 			$foto = ($user->foto == '') ? BASE.'/uploads/default.jpg' : BASE.'/uploads/'.$user->foto;
@@ -18,6 +24,8 @@
 			}else{
 				$texto = 'Seguir';
 			}
+
+			$_SESSION['ids_carregados'][] = $user->id;
 	?>
 	<div class="box_perfil">
 		<div class="img"><img src="<?php echo $foto;?>" /></div>
@@ -34,5 +42,11 @@
 		</div>
 	</div>
 	<?php }?>
+	</div>
+	<?php
+	if($usrs->rowCount() > 1){
+		echo '<a href="#" class="button load_more" id="perfis_busca" data-search="'.$busca.'">Carregar Mais</a>';
+	}
+	?>
 	</section>
 </section>

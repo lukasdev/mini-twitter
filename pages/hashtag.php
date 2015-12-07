@@ -6,14 +6,22 @@
 	<h1 class="title-page">Menções a <?php echo $hashtag;?></h1>
 
 	<section id="content">
+		<div class="content_tweets">
 	<?php
-		$pega_mencoes = $pdo->prepare("SELECT * FROM `tweets` WHERE `tweet` LIKE '%$hashtag%' ORDER BY `id` DESC");
+		$twt = $pdo->prepare("SELECT * FROM `tweets` WHERE `tweet` LIKE '%$hashtag%'");
+		$twt->execute();
+
+		$pega_mencoes = $pdo->prepare("SELECT * FROM `tweets` WHERE `tweet` LIKE '%$hashtag%' ORDER BY `id` DESC LIMIT 1");
 		$pega_mencoes->execute();
+
+		$_SESSION['ids_carregados'] = array();
 		while($tweet = $pega_mencoes->fetchObject()){
 
 			$user_tweet = $pdo->prepare("SELECT * FROM `usuarios` WHERE `id` = ?");
 			$user_tweet->execute(array($tweet->user_id));
 			$user_dados = $user_tweet->fetchObject();
+
+			$_SESSION['ids_carregados'][] = $tweet->id;
 	?>
 		<article class="tweet">
 			<span class="nome">
@@ -23,5 +31,11 @@
 			<span class="date"><?php echo date('d/m/Y H:i:s', strtotime($tweet->data));?></span>
 		</article>
 	<?php }?>
+	</div>
+	<?php
+	if($twt->rowCount() > 1){
+		echo '<a href="#" class="button load_more" id="tweets_hashtag" data-tag="'.$hashtag.'">Carregar Mais</a>';
+	}
+	?>
 	</section>
 </section>

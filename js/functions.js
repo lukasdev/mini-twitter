@@ -215,13 +215,22 @@ $(function(){
 		e.preventDefault();
 		var type = $(this).attr('id');
 		var id_user = '';
+		var hashtag = '';
+		var data_search = '';
 		if(type == 'tweets_timeline'){
-			var id_user = $(this).attr('data-id');
+			id_user = $(this).attr('data-id');
+		}
+		if(type == 'perfis_busca'){
+			data_search = $(this).attr('data-search');
+		}
+		
+		if(type == 'tweets_hashtag'){
+			hashtag = $(this).attr('data-tag');
 		}
 		$.ajax({
 			method:'POST',
 			url: base+'/sys/load_more.php',
-			data: {tipo: type, user_id: id_user},
+			data: {tipo: type, user_id: id_user, data_search: data_search, hashtag: hashtag},
 			dataType: 'json',
 			success: function(retorno){
 				if(retorno.load_more == 'nao'){
@@ -233,15 +242,28 @@ $(function(){
 					retorno.date
 					retorno.status
 				 */
-				 if(type == 'tweets_home' || type == 'tweets_timeline'){
+				 if(type == 'tweets_home' || type == 'tweets_timeline' || type == 'tweets_hashtag'){
 
 				 	$.each(retorno.results, function(i, val){
 
 				 		var tweet = '<article class="tweet">';
-					 		tweet += '<span class="nome"><a href="#">'+retorno.results[i].nome+'</a> disse:</span>';
+					 		tweet += '<span class="nome"><a href="'+base+'/'+retorno.results[i].nickname+'">'+retorno.results[i].nome+'</a> disse:</span>';
 							tweet += '<p>'+retorno.results[i].tweet+'</p>';
 							tweet += '<span class="date">'+retorno.results[i].date+'</span></article>';
 						$('.content_tweets').append(tweet);
+				 	});
+				 }else if(type == 'perfis_busca'){
+				 	$.each(retorno.results, function(i, val){
+				 		var dados = retorno.results[i];
+				 		var perfil = '<div class="box_perfil"><div class="img"><img src="'+dados.foto+'" /></div>';
+							perfil += '<div class="fix">';
+							perfil += '<a href="#" class="button seguir" data-user="'+dados.id+'"><span class="icon-user"></span> '+dados.texto+'</a>';
+							perfil += '</div><span class="perfil_nick">';
+							perfil += '<span><a href="'+base+'/'+dados.nickname+'">'+dados.nome+'</a></span>';
+							perfil += '<p><a href="'+base+'/'+dados.nickname+'">@'+dados.nickname+'</a></p>';
+							perfil += '</span><div class="desc"><p>'+dados.descricao+'</p></div></div>';
+
+						$('.content_perfis').append(perfil);
 				 	});
 				 }
 			}

@@ -25,6 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 				$user_dados = $user_tweet->fetchObject();
 
 				$retorno['results'][] = array(
+					'nickname' => $user_dados->nickname,
 					'nome' => $user_dados->nome, 
 					'tweet' => $tweet->tweet, 
 					'date' => date('d/m/Y H:i:s', strtotime($tweet->data)), 
